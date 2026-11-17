@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -69,7 +70,7 @@ public class AccountTransferService {
 
         // 2. Delegate ledger persistence to Transaction Service via OpenFeign
         String internalRef = "TXN-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
-        TransactionRequest txRequest = new TransactionRequest(internalRef,fromAccountNum, toAccountNum, amount, "DEBIT_TRANSFER");
+        TransactionRequest txRequest = new TransactionRequest(internalRef, fromAccountNum, toAccountNum, amount, "DEBIT_TRANSFER");
         TransactionResponse txResponse = transactionFeignClient.createTransaction(txRequest);
 
         // 3. Persist async/unstructured audit trail into MongoDB
@@ -87,5 +88,9 @@ public class AccountTransferService {
         auditRepository.save(auditLog);
 
         return txResponse;
+    }
+
+    public List<TransactionResponse> getTransactionByAccountNumber(String accountNumber) {
+        return transactionFeignClient.getTransactionsByAccount(accountNumber);
     }
 }

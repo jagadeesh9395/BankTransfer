@@ -7,10 +7,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/accounts/transfers")
@@ -28,5 +27,11 @@ public class AccountTransferController {
                 request.performedBy()
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TransactionResponse>> getTransactionByAccountNumber(@RequestParam String accountNumber) {
+        List<TransactionResponse> response = accountTransferService.getTransactionByAccountNumber(accountNumber);
+        return ResponseEntity.ok(response);
     }
 }
