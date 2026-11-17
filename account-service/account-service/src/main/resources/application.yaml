@@ -31,3 +31,16 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
     instance:
       prefer-ip-address: true
+
+
+#langchain with groq API Key
+
+langchain4j:
+  open-ai:
+    chat-model:
+      api-key: ${GROQ_API_KEY}
+      base-url: https://api.groq.com/openai/v1
+      model-name: openai/gpt-oss-120b
+      temperature: 0.5
+      log-requests: true
+      log-responses: true

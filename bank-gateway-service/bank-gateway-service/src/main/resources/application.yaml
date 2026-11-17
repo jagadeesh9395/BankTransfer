@@ -11,7 +11,7 @@ spring:
             - id: ACCOUNT-SERVICE
               uri: lb://account-service
               predicates:
-                - Path=/api/v1/accounts/**
+                - Path=/api/v1/accounts/**,/api/v1/ai/**
             - id: TRANSACTION-SERVICE
               uri: lb://transaction-service
               predicates:
