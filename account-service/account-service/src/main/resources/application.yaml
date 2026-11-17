@@ -22,6 +22,12 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/bank_transaction_logs
 
-services:
-  transaction:
-    url: http://localhost:8082
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    instance:
+      prefer-ip-address: true
