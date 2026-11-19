@@ -9,6 +9,7 @@ import com.jag.account_service.entity.sql.Account;
 import com.jag.account_service.entity.sql.AccountStatus;
 import com.jag.account_service.repository.nosql.AccountAuditRepository;
 import com.jag.account_service.repository.sql.AccountRepository;
+import com.jag.account_service.util.AccountCustomerUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,8 @@ public class AccountTransferService {
 
     private final AccountRepository accountRepository;             // PostgreSQL (JPA)
     private final AccountAuditRepository auditRepository;          // MongoDB
-    private final TransactionFeignClient transactionFeignClient;   // Feign Client
+    private final TransactionFeignClient transactionFeignClient;  // Feign Client
+    private final AccountCustomerUtil accountCustomerUtil;
 
     @Transactional
     public TransactionResponse initiateTransfer(String fromAccountNum, String toAccountNum, BigDecimal amount, String performedBy) {
@@ -46,9 +48,10 @@ public class AccountTransferService {
         Account destinationAccount = accountRepository.findByAccountNumber(toAccountNum)
                 .orElseThrow(() -> new IllegalArgumentException("Account not found: " + toAccountNum));
 
+
+        String customerId = accountCustomerUtil.getPerformedBy(fromAccountNum);
         String actor = (performedBy == null || performedBy.isBlank())
-                ? sourceAccount.getCustomerId()
-                : performedBy.trim();
+                ? accountCustomerUtil.getCustomerName(customerId) : performedBy.trim();
 
         if (!AccountStatus.ACTIVE.equals(sourceAccount.getStatus())) {
             throw new IllegalStateException("Source account is not active: " + fromAccountNum);
