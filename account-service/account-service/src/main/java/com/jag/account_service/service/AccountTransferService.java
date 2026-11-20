@@ -96,4 +96,8 @@ public class AccountTransferService {
     public List<TransactionResponse> getTransactionByAccountNumber(String accountNumber) {
         return transactionFeignClient.getTransactionsByAccount(accountNumber);
     }
+
+    public Double getAccountBalanceByAccountNumber(String accountNumber) {
+        return accountRepository.getAccountBalanceByAccountNumber(accountNumber);
+    }
 }

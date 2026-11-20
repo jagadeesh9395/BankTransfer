@@ -1,0 +1,13 @@
+package com.jag.account_service.repository.sql;
+
+import com.jag.account_service.entity.sql.UserLogin;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface UserLoginRepository extends JpaRepository<UserLogin, Long> {
+    Optional<UserLogin> findByUsername(String username);
+    Optional<UserLogin> findByCustomerId(String customerId);
+    Optional<UserLogin> findByAccountNumber(String accountNumber);
+    boolean existsByUsername(String username);
+}

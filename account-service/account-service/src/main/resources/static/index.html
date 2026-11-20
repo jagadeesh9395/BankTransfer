@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank AI Assistant - Login</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#2563eb"/>
+                        <path d="M2 17L12 22L22 17" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h1>Bank AI Assistant</h1>
+                <p>Smart Banking with AI-Powered Chat</p>
+            </div>
+
+            <div class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="button" class="login-btn" onclick="login()">Sign In</button>
+
+                <div class="login-footer">
+                    <p>Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
+                </div>
+            </div>
+
+            <div id="registerForm" class="register-form" style="display: none;">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <label for="regUsername">Username</label>
+                    <input type="text" id="regUsername" placeholder="Choose a username">
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" placeholder="Choose a password">
+                </div>
+                <div class="form-group">
+                    <label for="regCustomerId">Customer ID</label>
+                    <input type="text" id="regCustomerId" placeholder="Enter customer ID">
+                </div>
+                <div class="form-group">
+                    <label for="regAccountNumber">Account Number</label>
+                    <input type="text" id="regAccountNumber" placeholder="Enter account number">
+                </div>
+                <button type="button" class="login-btn" onclick="register()">Register</button>
+                <div class="login-footer">
+                    <p>Already have an account? <a href="#" onclick="hideRegister()">Sign In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>
